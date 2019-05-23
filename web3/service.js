@@ -2,7 +2,7 @@ import Web3 from 'web3';
 import { abi } from './abi';
 
 const TEST_PROVIDER_URL = 'https://ropsten.infura.io/v3/da3111c149bb4134a9b3439392abe518';
-const ADDRESS = '0x67a899c0EB522006B25c05aF2025E4a12815fa8E';
+const ADDRESS = '0x608bb1a6B271e27B55E3A913E6E349869DcF28A2';
 
 class Web3Service {
   constructor() {
