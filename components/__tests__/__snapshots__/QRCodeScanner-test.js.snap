@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders corectly 1`] = `
+<Text
+  style={
+    Object {
+      "alignSelf": "flex-start",
+      "backgroundColor": "#cac6e5",
+      "borderColor": "#9087d2",
+      "borderWidth": 2,
+      "color": "#fff",
+      "fontFamily": "raleway",
+      "fontSize": 20,
+      "height": 65,
+      "paddingVertical": 20,
+      "textAlign": "center",
+      "width": "100%",
+      "zIndex": 1,
+    }
+  }
+>
+  Requesting for camera permission
+</Text>
+`;
