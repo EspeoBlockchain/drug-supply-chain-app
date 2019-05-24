@@ -63,18 +63,15 @@ class Web3Service {
 
   async verifyItem(drugItemId) {
     const drugItemBytes = this.convertUtf8ToBytes(drugItemId);
-    let result = '';
     try {
       const codes = await this.contract.methods
         .isPurchasable(drugItemBytes)
         .call();
       const uniqueCodes = [...new Set(codes)];
-
-      result = uniqueCodes.map(code => this.drugStates.get(code)).join('. ');
+      return uniqueCodes.map(code => this.drugStates.get(code)).join('. ');
     } catch (err) {
-      result = err;
+      return Promise.reject(err);
     }
-    return result;
   }
 }
 
