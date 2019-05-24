@@ -1,12 +1,11 @@
 import Web3 from 'web3';
 import { abi } from './abi';
-
-const TEST_PROVIDER_URL = 'https://ropsten.infura.io/v3/da3111c149bb4134a9b3439392abe518';
-const ADDRESS = '0x608bb1a6B271e27B55E3A913E6E349869DcF28A2';
+import { PROVIDER, ADDRESS } from 'react-native-dotenv';
 
 class Web3Service {
   constructor() {
     this.web3 = new Web3(this.httpProvider());
+    alert(this.web3)
     this.web3.eth.defaultGas = 1000000;
     this.web3.eth.defaultGasPrice = 2000000000;
     this.web3.transactionConfirmationBlocks = 1;
@@ -23,7 +22,7 @@ class Web3Service {
   }
 
   httpProvider() {
-    return new Web3.providers.HttpProvider(TEST_PROVIDER_URL);
+    return new Web3.providers.HttpProvider(PROVIDER);
   }
 
   newContract(abi, address) {
@@ -39,24 +38,7 @@ class Web3Service {
   }
 
   convertUtf8ToBytes(str) {
-    const shortVersion = str.replace(/-/g, '');
-    return this.web3.utils.hexToBytes(this.web3.utils.utf8ToHex(shortVersion));
-  }
-
-  getGasPrice() {
-    return this.web3.eth.getGasPrice();
-  }
-
-  getBlock(blockNo) {
-    return this.web3.eth.getBlock(blockNo);
-  }
-
-  getTransactionCount() {
-    return this.web3.eth.getTransactionCount(ADDRESS);
-  }
-
-  isVendor(vendorAddress) {
-    return this.contract.methods.isVendor(vendorAddress).call();
+    return this.web3.utils.hexToBytes(this.web3.utils.utf8ToHex(str));
   }
 
   registerInitialHandover(drugItemId, address, participantCategory, publicKey) {
@@ -89,9 +71,9 @@ class Web3Service {
         .call();
       const uniqueCodes = [...new Set(codes)];
 
-      uniqueCodes.forEach((code) => {
-        result += `${this.drugStates.get(code)}. `;
-      });
+      result = uniqueCodes.map((code) => {
+        return this.drugStates.get(code);
+      }).join('.');
     } catch (err) {
       result = err;
     }

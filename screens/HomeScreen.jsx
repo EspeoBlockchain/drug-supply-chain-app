@@ -5,10 +5,8 @@ import {
   Text,
   View,
   Image,
-  Alert,
 } from 'react-native';
 import PropTypes from 'prop-types';
-import Web3Service from '../web3/service';
 import colors from '../constants/Colors';
 import fonts from '../constants/Fonts';
 import ButtonWithIcon from '../components/ButtonWithIcon';
@@ -54,31 +52,12 @@ export default class HomeScreen extends PureComponent {
     header: null,
   };
 
-  state = {
-    isVendor: '?',
-  }
-
-  componentDidMount() {
-    Web3Service.isVendor('0xeceffab2caf1ec535d407d366d747b575018d65e').then((res) => {
-      this.setState({
-        isVendor: res,
-      });
-    })
-      .catch((err) => {
-        Alert.alert(
-          'Alert',
-          err,
-        );
-      });
-  }
-
   onButtonPress = (screen) => {
     const { navigation } = this.props;
     navigation.navigate(screen);
   }
 
   render() {
-    const { isVendor } = this.state;
     return (
       <View style={styles.container}>
         <ScrollView style={styles.buttonsContainer}>
@@ -109,10 +88,6 @@ export default class HomeScreen extends PureComponent {
               buttonTextStyle="verifyText"
             />
           </View>
-          <Text>
-            IsVendor:
-            {isVendor && isVendor.toString()}
-          </Text>
         </ScrollView>
       </View>
     );

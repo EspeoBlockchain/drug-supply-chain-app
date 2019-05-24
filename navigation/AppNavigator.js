@@ -1,6 +1,5 @@
 import { createStackNavigator, createAppContainer } from 'react-navigation';
 import HomeScreen from '../screens/HomeScreen';
-import QRCodeScreen from '../screens/QRCodeScreen';
 import VendorScreen from '../screens/VendorScreen';
 import CarrierScreen from '../screens/CarrierScreen';
 import VerifierScreen from '../screens/VerifierScreen';
@@ -10,10 +9,7 @@ import fonts from '../constants/Fonts';
 const AppNavigator = createStackNavigator(
   {
     Home: HomeScreen,
-    QRCode: QRCodeScreen,
-    Vendor: {
-      screen: VendorScreen,
-    },
+    Vendor: VendorScreen,
     Carrier: CarrierScreen,
     Verifier: VerifierScreen,
   },
