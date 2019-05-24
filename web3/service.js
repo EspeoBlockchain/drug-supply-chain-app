@@ -5,7 +5,6 @@ import { PROVIDER, ADDRESS } from 'react-native-dotenv';
 class Web3Service {
   constructor() {
     this.web3 = new Web3(this.httpProvider());
-    alert(this.web3)
     this.web3.eth.defaultGas = 1000000;
     this.web3.eth.defaultGasPrice = 2000000000;
     this.web3.transactionConfirmationBlocks = 1;
@@ -71,9 +70,7 @@ class Web3Service {
         .call();
       const uniqueCodes = [...new Set(codes)];
 
-      result = uniqueCodes.map((code) => {
-        return this.drugStates.get(code);
-      }).join('.');
+      result = uniqueCodes.map(code => this.drugStates.get(code)).join('. ');
     } catch (err) {
       result = err;
     }

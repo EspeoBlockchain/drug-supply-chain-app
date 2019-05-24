@@ -59,16 +59,14 @@ const scannedData = (props) => {
 
   const filteredData = Object.keys(data).map((item) => {
     let row = data[item] !== '' 
-      ? row = (
-        <View key={item} style={styles.row}>
-          <Text style={styles.label}>
-            {`${item}:`}
-          </Text>
-          <Text style={styles.value}>
-            {data[item]}
-          </Text>
-        </View>
-      )
+      ? <View key={item} style={styles.row}>
+        <Text style={styles.label}>
+          {`${item}:`}
+        </Text>
+        <Text style={styles.value}>
+          {data[item]}
+        </Text>
+      </View>
       : null;
     return row;
   });
