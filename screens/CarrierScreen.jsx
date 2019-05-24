@@ -104,6 +104,7 @@ export default class CarrierScreen extends Component {
         Web3Service.removeAccount(privateKey);
         this.setState({
           loading: false,
+          operationReady: false,
         });
       });
   }
