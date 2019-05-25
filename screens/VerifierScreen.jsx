@@ -53,6 +53,7 @@ export default class VerifierScreen extends PureComponent {
       .finally(() => {
         this.setState({
           loading: false,
+          operationReady: false,
         });
       });
   }

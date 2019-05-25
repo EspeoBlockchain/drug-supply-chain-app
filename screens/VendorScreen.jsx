@@ -97,6 +97,7 @@ export default class VendorScreen extends Component {
         Web3Service.removeAccount(privateKey);
         this.setState({
           loading: false,
+          operationReady: false,
         });
       });
   }
