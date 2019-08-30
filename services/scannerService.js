@@ -38,8 +38,14 @@ class ScannerService {
     }
 
     return {
-      drugItemId: result.id,
-      publicKey: result.vendor,
+      parsedData: {
+        drugItemId: result.id,
+        publicKey: result.vendor,
+      },
+      displayedData: {
+        "Drug item id": result.id,
+        "Vendor public key": result.vendor,
+      },
     };
   }
 
@@ -57,10 +63,17 @@ class ScannerService {
     }
 
     return {
-      address: result.carrier,
-      transitCategory: this.transit.get(result.category),
-      temperature: result.temperature,
-      publicKey: result.carrier,
+      parsedData: {
+        address: result.carrier,
+        transitCategory: this.transit.get(result.category),
+        temperature: result.temperature,
+        publicKey: result.carrier,
+      },
+      displayedData: {
+        "Carrier public key": result.carrier,
+        "Transit": result.category,
+        "Temperature": result.temperature,
+      },
     };
   }
 
@@ -76,8 +89,14 @@ class ScannerService {
     if (validObject) {
       type = 'carrier';
       return {
-        address: result[type],
-        participantCategory: this.participant.get(type),
+        parsedData: {
+          address: result[type],
+          participantCategory: this.participant.get(type),
+        },
+        displayedData: {
+          "Carrier public key": result[type],
+          "Category": type
+        },
       };
     }
 
@@ -85,8 +104,14 @@ class ScannerService {
     if (validObject) {
       type = 'pharmacy';
       return {
-        address: result[type],
-        participantCategory: this.participant.get(type),
+        parsedData: {
+          address: result[type],
+          participantCategory: this.participant.get(type),
+        },
+        displayedData: {
+          "Pharmacy public key": result[type],
+          "Category": type,
+        },
       };
     }
 
@@ -108,7 +133,12 @@ class ScannerService {
     }
 
     return {
-      privateKey: result.privateKey,
+      parsedData: {
+        privateKey: result.privateKey,
+      },
+      displayedData: {
+        "Private key": "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+      },  
     };
   }
 

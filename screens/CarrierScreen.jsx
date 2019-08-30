@@ -21,6 +21,7 @@ export default class CarrierScreen extends Component {
       privateKey: '',
       publicKey: '',
     },
+    displayedData: {},
     currentScan: 'package',
     loading: false,
     operationReady: false,
@@ -43,17 +44,23 @@ export default class CarrierScreen extends Component {
   }
 
   handleScan = (data, functionName, nextScan, operationReady) => {
-    const { packageData } = this.state;
+    const { packageData, displayedData } = this.state;
     const result = functionName(data);
     if (!result) return;
 
     const newPackageData = scannerService.updateObject(
       packageData,
-      result,
+      result.parsedData,
+    );
+
+    const newDisplayedData = scannerService.updateObject(
+      displayedData,
+      result.displayedData,
     );
 
     const newState = {
       packageData: newPackageData,
+      displayedData: newDisplayedData,
       currentScan: '',
       operationReady,
     };
@@ -112,7 +119,7 @@ export default class CarrierScreen extends Component {
   render() {
     const {
       currentScan,
-      packageData,
+      displayedData,
       operationReady,
       loading,
     } = this.state;
@@ -158,7 +165,7 @@ export default class CarrierScreen extends Component {
     return (
       <View style={styles.container}>
         {scan}
-        <ScannedData data={packageData} />
+        <ScannedData data={displayedData} />
         {loading && <Loader />}
         {operationReady && <Button text="Register" onButtonPress={this.onButtonPress} disabled={loading} />}
       </View>

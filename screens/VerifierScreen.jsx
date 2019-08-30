@@ -19,13 +19,15 @@ export default class VerifierScreen extends PureComponent {
   }
 
   handleDrugItemScan = (scannedData) => {
+    const { displayedData } = this.state;
     const result = scannerService.getDrugItemData(scannedData.data);
     if (!result) return;
 
     const newState = {
-      drugItemId: result.drugItemId,
+      drugItemId: result.parsedData.drugItemId,
       scanner: false,
     };
+
     this.setState({
       ...newState,
       operationReady: true,
@@ -61,14 +63,14 @@ export default class VerifierScreen extends PureComponent {
   render() {
     const {
       scanner,
-      drugItemId,
       operationReady,
       loading,
+      drugItemId
     } = this.state;
     return (
       <View style={styles.container}>
         {scanner && <QRCodeScanner handleQRScan={this.handleDrugItemScan} title="Please scan your drug item" />}
-        <ScannedData data={{ drugItemId }} />
+        <ScannedData data={{ "Drug item id": drugItemId }} />
         {loading && <Loader />}
         {operationReady && <Button text="Verify" onButtonPress={this.onButtonPress} disabled={loading} />}
       </View>
