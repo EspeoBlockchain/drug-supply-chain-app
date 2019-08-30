@@ -1,12 +1,12 @@
 import Web3 from 'web3';
 import { abi } from './abi';
-import { PROVIDER, ADDRESS } from 'react-native-dotenv';
+import { PROVIDER, ADDRESS, GAS_PRICE } from 'react-native-dotenv';
 
 class Web3Service {
   constructor() {
     this.web3 = new Web3(this.httpProvider());
     this.web3.eth.defaultGas = 1000000;
-    this.web3.eth.defaultGasPrice = 2000000000;
+    this.web3.eth.defaultGasPrice = parseInt(GAS_PRICE);
     this.web3.transactionConfirmationBlocks = 1;
     this.contract = this.newContract(abi, ADDRESS);
     this.drugStates = new Map([

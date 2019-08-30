@@ -1,8 +1,7 @@
 {
   "expo": {
-    "name": "WorkshopsApp",
-    "slug": "WorkshopsApp",
-    "privacy": "public",
+    "name": "DrugSupplyChain",
+    "slug": "drug-supply-chain",
     "sdkVersion": "32.0.0",
     "platforms": [
       "ios",
@@ -23,7 +22,11 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.espeoblockchain.drugsupplychain"
+    },
+    "android": {
+      "package": "com.espeoblockchain.drugsupplychain"
     }
   }
 }

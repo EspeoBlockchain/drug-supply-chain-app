@@ -19,6 +19,7 @@ export default class VendorScreen extends Component {
       privateKey: '',
       publicKey: '',
     },
+    displayedData: {},
     loading: false,
     operationReady: false,
     currentScan: 'package',
@@ -41,17 +42,23 @@ export default class VendorScreen extends Component {
   }
 
   handleScan = (scannedData, functionName, nextScan, operationReady) => {
-    const { packageData } = this.state;
+    const { packageData, displayedData } = this.state;
     const result = functionName(scannedData);
     if (!result) return;
 
     const newPackageData = scannerService.updateObject(
       packageData,
-      result,
+      result.parsedData,
+    );
+
+    const newDisplayedData = scannerService.updateObject(
+      displayedData,
+      result.displayedData,
     );
 
     const newState = {
       packageData: newPackageData,
+      displayedData: newDisplayedData,
       currentScan: '',
       operationReady,
     };
@@ -107,7 +114,7 @@ export default class VendorScreen extends Component {
       loading,
       operationReady,
       currentScan,
-      packageData,
+      displayedData,
     } = this.state;
 
     let scan = null;
@@ -143,7 +150,7 @@ export default class VendorScreen extends Component {
     return (
       <View style={styles.container}>
         {scan}
-        <ScannedData data={packageData} />
+        <ScannedData data={displayedData} />
         {loading && <Loader />}
         {operationReady && <Button text="Register" onButtonPress={this.onButtonPress} />}
       </View>
