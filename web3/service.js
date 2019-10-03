@@ -21,11 +21,11 @@ class Web3Service {
   }
 
   httpProvider() {
-    return new Web3.providers.HttpProvider(PROVIDER);
+    throw new Error('Not implemented');
   }
 
   newContract(abi, address) {
-    return new this.web3.eth.Contract(abi, address);
+    throw new Error('Not implemented');
   }
 
   addAccount(account) {
@@ -41,10 +41,7 @@ class Web3Service {
   }
 
   registerInitialHandover(drugItemId, address, participantCategory, publicKey) {
-    const drugItemBytes = this.convertUtf8ToBytes(drugItemId);
-    return this.contract.methods
-      .registerInitialHandover(drugItemBytes, address, participantCategory)
-      .send({ from: publicKey });
+    throw new Error('Not implemented');
   }
 
   registerHandover(
@@ -64,9 +61,7 @@ class Web3Service {
   async verifyItem(drugItemId) {
     const drugItemBytes = this.convertUtf8ToBytes(drugItemId);
     try {
-      const codes = await this.contract.methods
-        .isPurchasable(drugItemBytes)
-        .call();
+      throw new Error('Not implemented');
       const uniqueCodes = [...new Set(codes)];
       return uniqueCodes.map(code => this.drugStates.get(code)).join('. ');
     } catch (err) {
